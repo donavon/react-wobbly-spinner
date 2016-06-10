@@ -1,13 +1,18 @@
 import React from "react";
 import { propTypes, defaultProps } from "./WobblySpinner.props";
 import * as styleSheetFactory from "./styleSheetFactory";
+import prvt from "./privateProperty";
 
 export default class WobblySpinner extends React.Component {
     static propTypes = propTypes
     static defaultProps = defaultProps
 
+    get className() {
+        return prvt(this).wobblySpinnerStyleSheet.className;
+    }
+
     componentWillMount() {
-        this._wobblySpinnerStyleSheet = styleSheetFactory.create(this.props);
+        prvt(this).wobblySpinnerStyleSheet = styleSheetFactory.create(this.props);
     }
 
     shouldComponentUpdate(nextProps) {
@@ -15,21 +20,21 @@ export default class WobblySpinner extends React.Component {
     }
 
     componentWillUpdate(nextProps) {
-        this._prevStyleSheet = this._wobblySpinnerStyleSheet; // So we can destroy it later in `componentDidUpdate`.
-        this._wobblySpinnerStyleSheet = styleSheetFactory.create(nextProps);
+        prvt(this).prevStyleSheet = prvt(this).wobblySpinnerStyleSheet; // So we can destroy it later in `componentDidUpdate`.
+        prvt(this).wobblySpinnerStyleSheet = styleSheetFactory.create(nextProps);
     }
 
     render() {
-        return <div className={this._wobblySpinnerStyleSheet.className} />;
+        return <div className={this.className} />;
     }
 
     componentDidUpdate() {
-        styleSheetFactory.destroy(this._prevStyleSheet);
-        delete this._prevStyleSheet;
+        styleSheetFactory.destroy(prvt(this).prevStyleSheet);
+        // delete this._prevStyleSheet;
     }
 
     componentWillUnmount() {
-        styleSheetFactory.destroy(this._wobblySpinnerStyleSheet);
-        delete this._wobblySpinnerStyleSheet;
+        styleSheetFactory.destroy(prvt(this).wobblySpinnerStyleSheet);
+        // delete this._wobblySpinnerStyleSheet;
     }
 }
