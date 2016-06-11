@@ -19,7 +19,7 @@ describe("One WobblySpinner", function() {
         });
         it("render the correct HTML", () => {
             var wrapper = mount(<WobblySpinner />);
-            expect(wrapper.html()).to.equal(`<div class="${wrapper.instance()._wobblySpinnerStyleSheet.className}"></div>`);
+            expect(wrapper.html()).to.equal(`<div class="${wrapper.instance().className}"></div>`);
             wrapper.unmount();
         });
         it("attaches 2 <style> elements into the DOM head (keyframes and 1 spinner sheet)", () => {
