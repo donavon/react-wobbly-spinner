@@ -24,7 +24,7 @@ export default class WobblySpinner extends React.Component {
     }
 
     render() {
-        return <div className={this._wobblySpinnerStyleSheet.className} />;
+        return <div className={this.className} />;
     }
 
     componentDidUpdate() {
