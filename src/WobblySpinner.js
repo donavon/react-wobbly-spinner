@@ -6,6 +6,10 @@ export default class WobblySpinner extends React.Component {
     static propTypes = propTypes
     static defaultProps = defaultProps
 
+    get className() {
+        return this._wobblySpinnerStyleSheet.className;
+    }
+
     componentWillMount() {
         this._wobblySpinnerStyleSheet = styleSheetFactory.create(this.props);
     }
